@@ -1,13 +1,13 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
 import rospy
-from duckietown import DTROS
+from duckietown.dtros import DTROS, NodeType
 from duckietown_msgs.msg import Twist2DStamped
 
 class MyNode(DTROS):
 
     def __init__(self, node_name):
-        super(MyNode, self).__init__(node_name=node_name)
+        super(MyNode, self).__init__(node_name=node_name, node_type=NodeType.DEBUG)
         self.pub = rospy.Publisher("~car_cmd", Twist2DStamped, queue_size=1)
 
     def run(self):
@@ -16,7 +16,7 @@ class MyNode(DTROS):
         while not rospy.is_shutdown():
             msg = Twist2DStamped()
             msg.v = 0.0
-            msg.omega = 0.5
+            msg.omega = 1.0
             rospy.loginfo("Publishing message")
             self.pub.publish(msg)
             rate.sleep()
