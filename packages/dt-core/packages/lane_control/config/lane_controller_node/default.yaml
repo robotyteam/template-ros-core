@@ -24,6 +24,6 @@ phi_resolution: 0.051
 
 stop_line_slowdown:
   start: 0.6
-  end: 0.15
+  end: 0.18
 
 verbose: 0
