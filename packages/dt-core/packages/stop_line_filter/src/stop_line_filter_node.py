@@ -56,6 +56,7 @@ class StopLineFilterNode(DTROS):
         # 3501 shit fix
         #if (self.state == "INTERSECTION_CONTROL") and (msg.state == "LANE_FOLLOWING"):
         #    self.after_intersection_work()
+        self.loginfo("CB_STATE: {}".format(msg.state))
         if msg.state ==  "INTERSECTION_CONTROL":
             self.after_intersection_work()
         self.state = msg.state
