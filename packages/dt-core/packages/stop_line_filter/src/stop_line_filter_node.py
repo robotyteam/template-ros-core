@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import numpy as np
+import math
 
 import rospy
 from duckietown.dtros import DTParam, DTROS, NodeType, ParamType
@@ -97,6 +98,7 @@ class StopLineFilterNode(DTROS):
         stop_line_x_accumulator = 0.0
         stop_line_y_accumulator = 0.0
         stop_line_min = 30.0
+        x_all = []
         for segment in segment_list_msg.segments:
             if segment.color != segment.RED:
                 continue
@@ -110,6 +112,7 @@ class StopLineFilterNode(DTROS):
             if avg_x < stop_line_min:
                 stop_line_min = avg_x
             stop_line_x_accumulator += avg_x
+            x_all.append(avg_x)
             stop_line_y_accumulator += avg_y  # TODO output covariance and not just mean
             good_seg_count += 1.0
 #        self.loginfo("stop_line_min_x = " + str (stop_line_min))
@@ -130,7 +133,23 @@ class StopLineFilterNode(DTROS):
         else:
             stop_line_reading_msg.stop_line_detected = True
             stop_line_point = Point()
-            stop_line_point.x = stop_line_min #stop_line_x_accumulator / good_seg_count
+            avg = stop_line_x_accumulator / good_seg_count
+            x_all = np.array(x_all)
+            self.loginfo("(x_all) = " + str(x_all))
+            std = x_all.std()
+            for i in x_all:
+                if math.fabs(avg-i) > 2*std:
+                    x_all = x_all[(i-0.01 > x_all) & (x_all > i+0.01)]
+            if (len(x_all) == 0):
+                stop_line_point.x = stop_line_min
+            else:
+                stop_line_point.x = np.average(x_all)
+
+            #self.loginfo("stop_line_x_accumulator / good_seg_count = " + str(stop_line_x_accumulator / good_seg_count))
+            #self.loginfo("stop_line_min = " + str(stop_line_min))
+            self.loginfo("np.average(x_all) = " + str(np.average(x_all)))
+            self.loginfo("(x_all) = " + str(x_all))
+            #stop_line_point.x = stop_line_min #stop_line_x_accumulator / good_seg_count
             stop_line_point.y = stop_line_y_accumulator / good_seg_count
             stop_line_reading_msg.stop_line_point = stop_line_point
             # Only detect redline if y is within max_y distance:
