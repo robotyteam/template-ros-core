@@ -146,7 +146,7 @@ class StopLineFilterNode(DTROS):
             #else:
             #    stop_line_point.x = np.average(x_all)
 
-            stop_line_point.x = np.sort(x_all)[1]
+            stop_line_point.x = np.sort(x_all)[2]
 
             #self.loginfo("stop_line_x_accumulator / good_seg_count = " + str(stop_line_x_accumulator / good_seg_count))
             #self.loginfo("stop_line_min = " + str(stop_line_min))
