@@ -98,6 +98,7 @@ class StopLineFilterNode(DTROS):
         stop_line_x_accumulator = 0.0
         stop_line_y_accumulator = 0.0
         stop_line_min = 30.0
+        second_stop_min = 30.0
         x_all = []
         for segment in segment_list_msg.segments:
             if segment.color != segment.RED:
@@ -135,20 +136,23 @@ class StopLineFilterNode(DTROS):
             stop_line_point = Point()
             avg = stop_line_x_accumulator / good_seg_count
             x_all = np.array(x_all)
-            self.loginfo("(x_all) = " + str(x_all))
-            std = x_all.std()
-            for i in x_all:
-                if math.fabs(avg-i) > 2*std:
-                    x_all = x_all[(i-0.01 > x_all) & (x_all > i+0.01)]
-            if (len(x_all) == 0):
-                stop_line_point.x = stop_line_min
-            else:
-                stop_line_point.x = np.average(x_all)
+            #self.loginfo("(x_all) = " + str(x_all))
+            #std = x_all.std()
+            #for i in x_all:
+            #    if math.fabs(avg-i) > 2*std:
+            #        x_all = x_all[(i-0.01 > x_all) & (x_all > i+0.01)]
+            #if (len(x_all) == 0):
+            #    stop_line_point.x = stop_line_min
+            #else:
+            #    stop_line_point.x = np.average(x_all)
+
+            stop_line_point.x = np.sort(x_all)[1]
 
             #self.loginfo("stop_line_x_accumulator / good_seg_count = " + str(stop_line_x_accumulator / good_seg_count))
             #self.loginfo("stop_line_min = " + str(stop_line_min))
-            self.loginfo("np.average(x_all) = " + str(np.average(x_all)))
+            #self.loginfo("np.average(x_all) = " + str(np.average(x_all)))
             self.loginfo("(x_all) = " + str(x_all))
+            self.loginfo("(stop_line_point.x) = " + str(stop_line_point.x))
             #stop_line_point.x = stop_line_min #stop_line_x_accumulator / good_seg_count
             stop_line_point.y = stop_line_y_accumulator / good_seg_count
             stop_line_reading_msg.stop_line_point = stop_line_point

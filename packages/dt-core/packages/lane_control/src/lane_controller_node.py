@@ -2,6 +2,8 @@
 import numpy as np
 import rospy
 
+from std_msgs.msg import Int32
+
 from duckietown.dtros import DTROS, NodeType, TopicType, DTParam, ParamType
 from duckietown_msgs.msg import Twist2DStamped, LanePose, WheelsCmdStamped, BoolStamped, FSMState, StopLineReading
 
@@ -140,6 +142,10 @@ class LaneControllerNode(DTROS):
                                                         StopLineReading,
                                                         self.cbObstacleStopLineReading,
                                                         queue_size=1)
+        self.sub_upd_param = rospy.Subscriber("~param_upd",
+                                                        Int32,
+                                                        self.cbParametersChanged,
+                                                        queue_size=1)
         
         self.log("Initialized!")
 
@@ -254,10 +260,11 @@ class LaneControllerNode(DTROS):
         self.publishCmd(car_control_msg)
         self.last_s = current_s
 
-    def cbParametersChanged(self):
+    def cbParametersChanged(self, useless_msg):
         """Updates parameters in the controller object."""
 
         self.controller.update_parameters(self.params)
+        rospy.loginfo("lane_controller: parameters updated!")
 
 
 if __name__ == "__main__":
