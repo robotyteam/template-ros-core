@@ -94,7 +94,7 @@ class RandomAprilTagTurnsNode:
                         randomIndex = numpy.random.randint(len(availableTurns))
                         chosenTurn = availableTurns[randomIndex]
                         rospy.loginfo("Turn type now: %i" %(chosenTurn))
-                        if chosenTurn != 2:
+                        if chosenTurn == 2:
                             break
                     # end of fix
 

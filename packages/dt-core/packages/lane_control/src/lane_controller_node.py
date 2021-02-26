@@ -146,6 +146,10 @@ class LaneControllerNode(DTROS):
                                                         Int32,
                                                         self.cbParametersChanged,
                                                         queue_size=1)
+        self.sub_upd_param = rospy.Subscriber("~fsm_mode",
+                                                        FSMState,
+                                                        self.cbMode,
+                                                        queue_size=1)
         
         self.log("Initialized!")
 
@@ -256,6 +260,11 @@ class LaneControllerNode(DTROS):
         # Add commands to car message
         car_control_msg.v = v
         car_control_msg.omega = omega
+
+	# intersection rotation on place 3501 fix
+        if self.fsm_state == 'INTERSECTION_CONTROL' and not(self.at_stop_line or self.at_obstacle_stop_line):
+            car_control_msg.v = max(v, 0.2)
+            rospy.loginfo('cur vel' + str(car_control_msg.v))
 
         self.publishCmd(car_control_msg)
         self.last_s = current_s
