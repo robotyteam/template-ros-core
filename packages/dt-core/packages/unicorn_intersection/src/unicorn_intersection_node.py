@@ -78,6 +78,7 @@ class UnicornIntersectionNode:
         rospy.set_param("~lane_controller/omega_ff", omega_ffs[turn_type])
         rospy.set_param("~lane_controller/omega_max", omega_maxs[turn_type])
         rospy.set_param("~lane_controller/omega_min", omega_mins[turn_type])
+        rospy.ser_param("~lane_controller/min_intersection_v", rospy.get_param("~min_intersection_v", 0.2))
         # Waiting for LF to adapt to new params
         rospy.sleep(1)
 
