@@ -88,8 +88,8 @@ class RandomAprilTagTurnsNode:
                 # now randomly choose a possible direction
                 if len(availableTurns) > 0:
                     
-                     randomIndex = numpy.random.randint(len(availableTurns))
-                     chosenTurn = availableTurns[randomIndex]
+                    randomIndex = numpy.random.randint(len(availableTurns))
+                    chosenTurn = availableTurns[randomIndex]
                     # 3501: turn off turns
                     #while True:
                     #    randomIndex = numpy.random.randint(len(availableTurns))

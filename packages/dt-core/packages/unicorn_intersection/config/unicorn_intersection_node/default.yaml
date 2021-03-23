@@ -1,11 +1,11 @@
 
 time_left_turn: 6.0
 time_straight_turn: 13
-time_right_turn: 2.0
+time_right_turn: 2
 
 ff_left: 0.018
 ff_straight: 0
-ff_right: -0.75
+ff_right: -0.7
 
 LFparams_left: {phi_max: -0.1, phi_min: -0.5, range_est: 0.3, red_to_white: true, use_yellow: true}
 LFparams_straight: {"red_to_white": True}

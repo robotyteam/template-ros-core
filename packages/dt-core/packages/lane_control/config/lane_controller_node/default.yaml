@@ -9,7 +9,7 @@ d_thres: 0.2615
 d_offset: 0.0
 
 omega_ff: 0
-min_intersection_v: 0.2
+min_intersection_v: 0.1
 
 integral_bounds:
   d:
