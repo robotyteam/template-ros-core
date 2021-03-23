@@ -87,15 +87,16 @@ class RandomAprilTagTurnsNode:
                 rospy.loginfo(f"[{self.node_name}] reports Available turns are: [{availableTurns}]")
                 # now randomly choose a possible direction
                 if len(availableTurns) > 0:
-                    # 3501: turn off right turns
-                    # randomIndex = numpy.random.randint(len(availableTurns))
-                    # chosenTurn = availableTurns[randomIndex]
-                    while True:
-                        randomIndex = numpy.random.randint(len(availableTurns))
-                        chosenTurn = availableTurns[randomIndex]
-                        rospy.loginfo("Turn type now: %i" %(chosenTurn))
-                        if chosenTurn == 2:
-                            break
+                    
+                     randomIndex = numpy.random.randint(len(availableTurns))
+                     chosenTurn = availableTurns[randomIndex]
+                    # 3501: turn off turns
+                    #while True:
+                    #    randomIndex = numpy.random.randint(len(availableTurns))
+                    #    chosenTurn = availableTurns[randomIndex]
+                    #    rospy.loginfo("Turn type now: %i" %(chosenTurn))
+                    #    if chosenTurn == 2:
+                    #        break
                     # end of fix
 
                     self.turn_type = chosenTurn

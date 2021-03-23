@@ -92,7 +92,6 @@ class LaneControllerNode(DTROS):
         self.params['~omega_ff'] = rospy.get_param('~omega_ff', None)
         self.params['~verbose'] = rospy.get_param('~verbose', None)
         self.params['~stop_line_slowdown'] = rospy.get_param('~stop_line_slowdown', None)
-        self.params['~min_intersection_v'] = rospy.get_param('min_intersection_v')
 
         # Need to create controller object before updating parameters, otherwise it will fail
         self.controller = LaneController(self.params)
@@ -264,7 +263,7 @@ class LaneControllerNode(DTROS):
 
 	# intersection rotation on place 3501 fix
         if self.fsm_state == 'INTERSECTION_CONTROL' and not(self.at_stop_line or self.at_obstacle_stop_line):
-            rospy.loginfo('min_v = ', rospy.get_param('~min_intersection_v'))
+            rospy.loginfo('min_v = ' + str(rospy.get_param('~min_intersection_v')))
             car_control_msg.v = max(v, rospy.get_param('~min_intersection_v'))
 
         self.publishCmd(car_control_msg)
