@@ -24,6 +24,8 @@ RUN ls -la
 COPY ./dependencies-apt.txt "${REPO_PATH}/"
 COPY ./dependencies-py.txt "${REPO_PATH}/"
 
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
 # install apt dependencies
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
