@@ -1,5 +1,5 @@
 # parameters
-ARG REPO_NAME="demo_repo"
+ARG REPO_NAME="template-ros-core"
 
 # ==================================================>
 # ==> Do not change this code
