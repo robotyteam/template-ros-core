@@ -20,7 +20,6 @@ class MyNode(DTROS):
         # publish message every 1 second
         rate = rospy.Rate(0.5) # 1Hz
         while not rospy.is_shutdown():
-            continue
             msg = Twist2DStamped()
             msg.v = 0.0
             msg.omega = 1.0
