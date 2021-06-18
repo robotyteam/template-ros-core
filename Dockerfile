@@ -1,5 +1,5 @@
 # parameters
-ARG REPO_NAME="demo_repo"
+ARG REPO_NAME="template-ros-core"
 
 # ==================================================>
 # ==> Do not change this code
@@ -23,6 +23,8 @@ RUN mkdir -p "${REPO_PATH}"
 RUN ls -la
 COPY ./dependencies-apt.txt "${REPO_PATH}/"
 COPY ./dependencies-py.txt "${REPO_PATH}/"
+
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 # install apt dependencies
 RUN apt-get update \
