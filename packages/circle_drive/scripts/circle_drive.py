@@ -19,7 +19,13 @@ class MyNode(DTROS):
 
     def cb_lineseg(self, msg):
         if len(msg.segments) > 0:
-            rospy.loginfo(msg.segments[0])
+            for i in msg.segments:
+                if i.color == Segment.YELLOW:
+                    rospy.loginfo(i.points[0].x)
+                    # 1. Throw out some fare points
+                    # 2. Calc avg of Y coord
+                    # 3. When you get "direction" -- calc omega 
+                    # 4. Publish msg to wheels
 
 
     def cb_fw(self, msg):
