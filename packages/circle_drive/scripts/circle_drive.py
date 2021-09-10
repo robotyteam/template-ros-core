@@ -22,7 +22,7 @@ class MyNode(DTROS):
         while not rospy.is_shutdown():
             msg = Twist2DStamped()
             msg.v = 0.0
-            msg.omega = 1.0
+            msg.omega = 5.0
             rospy.loginfo("Publishing message")
             self.pub.publish(msg)
             rate.sleep()
