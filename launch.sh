@@ -7,3 +7,8 @@ set -e
 echo "This is an empty launch script. Update it to launch your application."
 #roslaunch circle_drive circle_drive.launch
 roslaunch circle_drive circle_drive.launch
+
+roslaunch --wait <package> launchfile.launch &
+sleep 5
+# we put a short sleep in here because rostopic will fail if there's no roscore yet
+rostopic pub /$VEHICLE_NAME/fsm_node/mode duckietown_msgs/FSMState '{header: {}, state: "LANE_FOLLOWING"}'
