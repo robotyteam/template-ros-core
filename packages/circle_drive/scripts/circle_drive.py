@@ -24,7 +24,7 @@ class MyNode(DTROS):
             rospy.loginfo("Publishing message 0/0.0")
             self.pub.publish(msg)
             rate.sleep()
-            sys.stdout.flush()
+            #sys.stdout.flush()
 
 if __name__ == '__main__':
     # create the node
