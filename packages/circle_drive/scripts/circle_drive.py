@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys
 import rospy
 from duckietown.dtros import DTROS, NodeType
 from duckietown_msgs.msg import Twist2DStamped
@@ -23,6 +24,7 @@ class MyNode(DTROS):
             rospy.loginfo("Publishing message 0/0.0")
             self.pub.publish(msg)
             rate.sleep()
+            sys.stdout.flush()
 
 if __name__ == '__main__':
     # create the node
