@@ -20,7 +20,6 @@ class MyNode(DTROS):
             "~image",
             CompressedImage,
             self.action,
-            buff_size=10000000,
             queue_size=1
         )
 
@@ -31,7 +30,7 @@ class MyNode(DTROS):
         try:
             image = self.bridge.compressed_imgmsg_to_cv2(image_msg)
             self.cur_img = image
-            print(self.cur_img.shape)
+            
         except ValueError as e:
             self.logerr('Could not decode image: %s' % e)
             return
