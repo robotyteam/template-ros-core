@@ -16,34 +16,27 @@ class MyNode(DTROS):
         self.bridge = CvBridge()
         self.cur_img = None
         self.sub_image = rospy.Subscriber(
-            "~image/compressed",
+            "~camera_node/image/compressed",
+            #"~image/compressed",
             CompressedImage,
-            self.image_cb,
+            self.action,
             buff_size=10000000,
             queue_size=1
         )
 
-    def run(self):
-        # publish message every 1 second
-
-        rate = rospy.Rate(1) # 1Hz
-        while not rospy.is_shutdown():
-            vel, omega = solution(self.cur_img)
-            msg = Twist2DStamped()
-            msg.v = vel
-            msg.omega = omega
-            self.pub.publish(msg)
-            rate.sleep()
-            sys.stdout.flush()
-
-    def image_cb(self, image_msg):
+    def action(self, image_msg):
         try:
             image = self.bridge.compressed_imgmsg_to_cv2(image_msg)
             self.cur_img = image
         except ValueError as e:
             self.logerr('Could not decode image: %s' % e)
             return
-        print(image.shape)
+        vel, omega = solution(self.cur_img)
+        msg = Twist2DStamped()
+        msg.v = vel
+        msg.omega = omega
+        self.pub.publish(msg)
+        sys.stdout.flush()
 
 if __name__ == '__main__':
     # create the node
