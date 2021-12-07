@@ -3,7 +3,7 @@ ARG REPO_NAME="template-ros-core"
 
 # ==================================================>
 # ==> Do not change this code
-FROM light5551/ado_torch_template:arm64
+FROM osll/ado_torch_template:arm64
 # define repository path
 ARG REPO_NAME
 ARG REPO_PATH="${CATKIN_WS_DIR}/src/${REPO_NAME}"
