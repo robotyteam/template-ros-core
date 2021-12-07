@@ -24,6 +24,9 @@ class MyNode(DTROS):
             queue_size=1
         )
 
+    def run(self):
+        pass
+    
     def action(self, image_msg):
         try:
             image = self.bridge.compressed_imgmsg_to_cv2(image_msg)
