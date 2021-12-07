@@ -16,7 +16,7 @@ class MyNode(DTROS):
         self.bridge = CvBridge()
         self.cur_img = None
         self.sub_image = rospy.Subscriber(
-            "~camera_node/image/compressed",
+            "autobot20/camera_node/image/compressed",
             #"~image/compressed",
             CompressedImage,
             self.action,
@@ -26,11 +26,12 @@ class MyNode(DTROS):
 
     def run(self):
         pass
-    
+
     def action(self, image_msg):
         try:
             image = self.bridge.compressed_imgmsg_to_cv2(image_msg)
             self.cur_img = image
+            print(self.cur_img.shape)
         except ValueError as e:
             self.logerr('Could not decode image: %s' % e)
             return
