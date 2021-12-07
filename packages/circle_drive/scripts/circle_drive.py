@@ -17,7 +17,7 @@ class MyNode(DTROS):
         self.cur_img = None
         self.sub_image = rospy.Subscriber(
             #"/autobot20/camera_node/image/compressed",
-            "~image/compressed",
+            "~image",
             CompressedImage,
             self.action,
             buff_size=10000000,
