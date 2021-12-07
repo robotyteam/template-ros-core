@@ -16,8 +16,8 @@ class MyNode(DTROS):
         self.bridge = CvBridge()
         self.cur_img = None
         self.sub_image = rospy.Subscriber(
-            "/autobot20/camera_node/image/compressed",
-            #"~image/compressed",
+            #"/autobot20/camera_node/image/compressed",
+            "~image/compressed",
             CompressedImage,
             self.action,
             buff_size=10000000,
