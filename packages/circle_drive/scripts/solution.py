@@ -1,3 +1,3 @@
 
 def solution(obs):
-    return [0.2, 0.2]
+    return [0.0, 1]
