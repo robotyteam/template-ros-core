@@ -154,7 +154,7 @@ def solution(obs):
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
-        y_deviation = -82
+        y_deviation = -83
 
     pose = -(w_deviation + y_deviation) / 1000
     kP = 6.5  # основной коэффициент усиления поворота колес
