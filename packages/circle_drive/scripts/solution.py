@@ -3,7 +3,6 @@ def solution(obs):
     import numpy as np
     import math
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, (640, 480))
     #img = np.ascontiguousarray(obs)
     rgb = img.copy()
     height = rgb.shape[0]
