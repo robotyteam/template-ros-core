@@ -15,7 +15,9 @@ def solution(obs):
         (width, height * 3 / 5),
         (width, height)
     ]
-
+    if flag not in globals():
+        flag = 1
+        return[0.25, 0]
     def region_of_interest(img, vertices):
         mask = np.zeros_like(img)
         ch_count = img.shape[2]
