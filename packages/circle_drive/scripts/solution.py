@@ -109,7 +109,7 @@ def solution(obs):
         angles = 0.0
         for line in w_lines:
             for x1, y1, x2, y2 in line:
-                if x1>320:
+                if x1>360:
                     if (y2 > y1):
                         tmpX = x1
                         tmpY = y1
@@ -145,21 +145,21 @@ def solution(obs):
     # cv2.waitKey()
 
     #print(w_line_pose_x, y_line_pose_x)
-    w_need = 590
-    y_need = 130
+    w_need = 640
+    y_need = 480
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
-        w_deviation = 82
+        w_deviation = 100
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
-        y_deviation = -83
+        y_deviation = -50
 
     pose = -(w_deviation + y_deviation) / 1000
-    kP = 6.5  # основной коэффициент усиления поворота колес
+    kP = 50  # основной коэффициент усиления поворота колес
     if y_line_pose_y > 370 and y_angles < 32:
-        kP = 7.5  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
+        kP = 10  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
@@ -174,9 +174,9 @@ def solution(obs):
         steering = steering / len(average_pose)
     
     if -0.12 < steering < 0.12 and steering != 0:
-        vel = 1 # ускоряемся при движении прямо
+        vel = 0.25 # ускоряемся при движении прямо
         steering = steering * 0.98  # и корректируем руль на большой скорости
     else:
-        vel = 1  # скорость во время поворота
+        vel = 0.3  # скорость во время поворота
     print("steering", steering,"speed",vel)
     return [vel, steering]
