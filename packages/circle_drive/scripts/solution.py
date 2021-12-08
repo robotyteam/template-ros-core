@@ -5,7 +5,7 @@ def solution(obs):
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
     #img = np.ascontiguousarray(obs)
     rgb = img.copy()
-    flag = 1
+    #flag = 1
     height = rgb.shape[0]
     width = rgb.shape[1]
     region_vertices = [
@@ -16,7 +16,7 @@ def solution(obs):
         (width, height * 3 / 5),
         (width, height)
     ]
-    if flag not in globals():
+    if 'flag' not in globals():
         flag = 1
         return[0.25, 0]
     def region_of_interest(img, vertices):
