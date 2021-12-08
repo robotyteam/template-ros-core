@@ -5,6 +5,7 @@ def solution(obs):
     img = cv2.cvtColor(np.ascontiguousarray(obs), cv2.COLOR_BGR2RGB)
     #img = np.ascontiguousarray(obs)
     rgb = img.copy()
+    flag = 1
     height = rgb.shape[0]
     width = rgb.shape[1]
     region_vertices = [
