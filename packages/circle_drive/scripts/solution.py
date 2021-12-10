@@ -146,7 +146,7 @@ def solution(obs):
 
     #print(w_line_pose_x, y_line_pose_x)
     w_need = 565
-    y_need = 200
+    y_need = 190
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
@@ -177,6 +177,6 @@ def solution(obs):
         vel = 0.28 # ускоряемся при движении прямо
         steering = steering * 0.98  # и корректируем руль на большой скорости
     else:
-        vel = 0.32  # скорость во время поворота
+        vel = 0.25  # скорость во время поворота
     print("steering", steering,"speed",vel)
     return [vel, steering]
