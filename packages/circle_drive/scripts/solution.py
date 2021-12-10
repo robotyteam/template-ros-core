@@ -145,7 +145,7 @@ def solution(obs):
     # cv2.waitKey()
 
     #print(w_line_pose_x, y_line_pose_x)
-    w_need = 560
+    w_need = 565
     y_need = 200
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
@@ -159,7 +159,7 @@ def solution(obs):
     pose = -(w_deviation + y_deviation) / 1000
     kP = 15  # основной коэффициент усиления поворота колес
     if y_line_pose_y > 370 and y_angles < 32:
-        kP = 15  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
+        kP = 16  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
@@ -174,9 +174,9 @@ def solution(obs):
         steering = steering / len(average_pose)
     
     if -0.12 < steering < 0.12 and steering != 0:
-        vel = 0.25 # ускоряемся при движении прямо
+        vel = 0.26 # ускоряемся при движении прямо
         steering = steering * 0.98  # и корректируем руль на большой скорости
     else:
-        vel = 0.3  # скорость во время поворота
+        vel = 0.32  # скорость во время поворота
     print("steering", steering,"speed",vel)
     return [vel, steering]
