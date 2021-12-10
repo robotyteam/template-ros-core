@@ -145,25 +145,25 @@ def solution(obs):
     # cv2.waitKey()
 
     #print(w_line_pose_x, y_line_pose_x)
-    w_need = 640
-    y_need = 480
+    w_need = 560
+    y_need = 200
     if w_line_pose_x > 0:
         w_deviation = w_line_pose_x - w_need
     else:
-        w_deviation = 100
+        w_deviation = 50
     if y_line_pose_x > 0:
         y_deviation = y_line_pose_x - y_need
     else:
         y_deviation = -50
 
     pose = -(w_deviation + y_deviation) / 1000
-    kP = 50  # основной коэффициент усиления поворота колес
+    kP = 15  # основной коэффициент усиления поворота колес
     if y_line_pose_y > 370 and y_angles < 32:
-        kP = 10  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
+        kP = 15  # коэффициент, если обнаружена желтая разметка почти горизонтально близко к роботу
     steering = kP * pose
     if 'average_pose' not in globals():
             average_pose = []
-    if len(average_pose) < 6:  # количество элементов для вычисления среднего значения поворота руля
+    if len(average_pose) < 3:  # количество элементов для вычисления среднего значения поворота руля
         average_pose.append(steering)
     else:
         average_pose.pop(0)
